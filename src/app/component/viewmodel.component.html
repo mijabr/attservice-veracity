@@ -1,0 +1,9 @@
+<md-card id='{{model.Name}}' [ngGridItem]='{payload:model, col:model.Config.col, row:model.Config.row, sizex:model.Config.sizex, sizey:model.Config.sizey }'>
+	<md-card-title>{{model.Name}}</md-card-title>
+	<md-card-content>
+		<md-icon svgIcon='properties' (click)='toggleProperties()'></md-icon>
+		<div *ngIf='displayProperties' class='properties'>
+			<span *ngFor='let prop of model.Properties'>{{prop.Name}} : {{prop.Type}}<BR></span>
+		</div>
+	</md-card-content>
+</md-card>

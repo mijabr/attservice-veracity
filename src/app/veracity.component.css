@@ -1,0 +1,11 @@
+
+
+veracity {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.grid {
+	background-color: #efefef;
+	transform-origin: top center;
+	transition: transform 0.5s;
+}

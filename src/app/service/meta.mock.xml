@@ -1,0 +1,1155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:DataServices>
+    <Schema Namespace="AttService.ViewModel" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityType Name="Allowance">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+      </EntityType>
+      <EntityType Name="BomBatch">
+        <Key>
+          <PropertyRef Name="BatchNumber" />
+        </Key>
+        <Property Name="BatchNumber" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="StockReserved" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="Manufactured" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="BatchDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="DueDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="DateStockReserved" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="ManufacturedDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <NavigationProperty Name="BomHeader" Type="Collection(AttService.ViewModel.BomHeader)" />
+      </EntityType>
+      <EntityType Name="BomHeader">
+        <Key>
+          <PropertyRef Name="BatchNumber" />
+          <PropertyRef Name="BillId" />
+        </Key>
+        <Property Name="BatchNumber" Type="Edm.Int32" Nullable="false" />
+        <Property Name="BillId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="BillLocation" Type="Edm.String" />
+        <Property Name="BillCode" Type="Edm.String" />
+        <NavigationProperty Name="BomDetail" Type="Collection(AttService.ViewModel.BomDetail)" />
+      </EntityType>
+      <EntityType Name="BomDetail">
+        <Key>
+          <PropertyRef Name="BatchNumber" />
+          <PropertyRef Name="BillId" />
+          <PropertyRef Name="Sequence" />
+        </Key>
+        <Property Name="BatchNumber" Type="Edm.Int32" Nullable="false" />
+        <Property Name="BillId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Sequence" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Location" Type="Edm.String" />
+        <Property Name="Product" Type="Edm.String" />
+        <Property Name="SubBillId" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="SubBomDetail" Type="Collection(AttService.ViewModel.BomDetail)" />
+      </EntityType>
+      <EntityType Name="CompanyOption">
+        <Key>
+          <PropertyRef Name="CompanyName" />
+        </Key>
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="false" />
+        <Property Name="AddressLine1" Type="Edm.String" />
+        <Property Name="AddressLine2" Type="Edm.String" />
+        <Property Name="AddressLine3" Type="Edm.String" />
+        <Property Name="AddressLine4" Type="Edm.String" />
+        <Property Name="BusinessNumber" Type="Edm.String" />
+        <Property Name="BusinessSubNumber" Type="Edm.String" />
+        <Property Name="GLN" Type="Edm.String" />
+        <Property Name="Website" Type="Edm.String" />
+        <Property Name="Contact" Type="Edm.String" />
+        <Property Name="Telephone" Type="Edm.String" />
+        <Property Name="Fax" Type="Edm.String" />
+        <Property Name="Email" Type="Edm.String" />
+        <Property Name="RemittanceName" Type="Edm.String" />
+        <Property Name="RemittanceAddress1" Type="Edm.String" />
+        <Property Name="RemittanceAddress2" Type="Edm.String" />
+        <Property Name="RemittanceAddress3" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="Contribution">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+      </EntityType>
+      <EntityType Name="CostCentre">
+        <Key>
+          <PropertyRef Name="CostCentreCode" />
+        </Key>
+        <Property Name="CostCentreCode" Type="Edm.String" Nullable="false" />
+        <Property Name="CostCentreDescription" Type="Edm.String" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+      </EntityType>
+      <EntityType Name="CostCentreBudgetFinancials">
+        <Key>
+          <PropertyRef Name="CostCentre" />
+          <PropertyRef Name="PeriodNum" />
+        </Key>
+        <Property Name="CostCentre" Type="Edm.String" Nullable="false" />
+        <Property Name="CostCentreDescription" Type="Edm.String" />
+        <Property Name="CostCentreInactive" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="GeneralLedgerCode" Type="Edm.String" />
+        <Property Name="GeneralLedgerDescription" Type="Edm.String" />
+        <Property Name="GeneralLedgerInactive" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="GeneralLedgerAccountType" Type="Edm.Int32" Nullable="false" />
+        <Property Name="GeneralLedgerDebitCredit" Type="Edm.String" />
+        <Property Name="GeneralLedgerStandardCode" Type="Edm.String" />
+        <Property Name="GeneralLedgerGroup" Type="Edm.String" />
+        <Property Name="GeneralLedgerColumn" Type="Edm.String" />
+        <Property Name="GeneralLedgerIndent" Type="Edm.String" />
+        <Property Name="GeneralLedgerUnderline" Type="Edm.String" />
+        <Property Name="GeneralLedgerSpaceBefore" Type="Edm.String" />
+        <Property Name="GeneralLedgerSpaceAfter" Type="Edm.String" />
+        <Property Name="PeriodNum" Type="Edm.Int32" Nullable="false" />
+        <Property Name="PeriodName" Type="Edm.String" />
+        <Property Name="PeriodDebitAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="PeriodCreditAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="PeriodAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="YTDDebitAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="YTDCreditAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="YTDAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="PeriodBudget" Type="Edm.Double" Nullable="false" />
+        <Property Name="YTDBudget" Type="Edm.Double" Nullable="false" />
+      </EntityType>
+      <EntityType Name="CostCentreFinancials">
+        <Key>
+          <PropertyRef Name="CostCentre" />
+          <PropertyRef Name="PeriodNum" />
+        </Key>
+        <Property Name="CostCentre" Type="Edm.String" Nullable="false" />
+        <Property Name="CostCentreDescription" Type="Edm.String" />
+        <Property Name="CostCentreInactive" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="GeneralLedgerCode" Type="Edm.String" />
+        <Property Name="GeneralLedgerDescription" Type="Edm.String" />
+        <Property Name="GeneralLedgerInactive" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="GeneralLedgerAccountType" Type="Edm.Int32" Nullable="false" />
+        <Property Name="GeneralLedgerDebitCredit" Type="Edm.String" />
+        <Property Name="GeneralLedgerStandardCode" Type="Edm.String" />
+        <Property Name="GeneralLedgerGroup" Type="Edm.String" />
+        <Property Name="GeneralLedgerColumn" Type="Edm.String" />
+        <Property Name="GeneralLedgerIndent" Type="Edm.String" />
+        <Property Name="GeneralLedgerUnderline" Type="Edm.String" />
+        <Property Name="GeneralLedgerSpaceBefore" Type="Edm.String" />
+        <Property Name="GeneralLedgerSpaceAfter" Type="Edm.String" />
+        <Property Name="PeriodNum" Type="Edm.Int32" Nullable="false" />
+        <Property Name="PeriodName" Type="Edm.String" />
+        <Property Name="PeriodDebitAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="PeriodCreditAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="PeriodAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="YTDDebitAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="YTDCreditAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="YTDAmount" Type="Edm.Double" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Customer">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="Contact" Type="Edm.String" />
+        <Property Name="Phone" Type="Edm.String" />
+        <Property Name="Email" Type="Edm.String" />
+        <Property Name="HeadOfficeCode" Type="Edm.String" />
+        <Property Name="SalesRepCode" Type="Edm.String" />
+        <Property Name="SalesRepName" Type="Edm.String" />
+        <Property Name="Location" Type="Edm.String" />
+        <Property Name="SortDetail" Type="Edm.String" />
+        <Property Name="Territory" Type="Edm.String" />
+        <Property Name="Category" Type="Edm.String" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="Period0Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period1Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period2Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period3Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="UnallocatedBalance" Type="Edm.Double" Nullable="false" />
+        <Property Name="PostDatedBalance" Type="Edm.Double" Nullable="false" />
+        <Property Name="SpecialPriceCategory" Type="Edm.String" />
+        <Property Name="Address1" Type="Edm.String" />
+        <Property Name="Address2" Type="Edm.String" />
+        <Property Name="Suburb" Type="Edm.String" />
+        <Property Name="State" Type="Edm.String" />
+        <Property Name="PostCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="Fax" Type="Edm.String" />
+        <Property Name="Comment" Type="Edm.String" />
+        <Property Name="BusinessNumber" Type="Edm.String" />
+        <Property Name="GLN" Type="Edm.String" />
+        <Property Name="Website" Type="Edm.String" />
+        <NavigationProperty Name="CustomerTransaction" Type="Collection(AttService.ViewModel.CustomerTransaction)" />
+        <NavigationProperty Name="CustomerTransactionDetail" Type="Collection(AttService.ViewModel.CustomerTransactionDetail)" />
+      </EntityType>
+      <EntityType Name="CustomerDateAgeing">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="AgeingBasedDate" Type="Edm.String" />
+        <Property Name="AgeingBands" Type="Edm.String" />
+        <Property Name="CurrentDays" Type="Edm.Int32" Nullable="false" />
+        <Property Name="AgeingBand1Days" Type="Edm.Int32" Nullable="false" />
+        <Property Name="AgeingBand2Days" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CurrentDescription" Type="Edm.String" />
+        <Property Name="AgeingBand1Description" Type="Edm.String" />
+        <Property Name="AgeingBand2Description" Type="Edm.String" />
+        <Property Name="AgeingBand3Description" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="CustomerInvoiceDDAM">
+        <Key>
+          <PropertyRef Name="CustomerCode" />
+          <PropertyRef Name="InvoiceNumber" />
+          <PropertyRef Name="InvoiceReference" />
+          <PropertyRef Name="DocEntrySeqNumber" />
+        </Key>
+        <Property Name="CustomerCode" Type="Edm.String" Nullable="false" />
+        <Property Name="InvoiceNumber" Type="Edm.String" Nullable="false" />
+        <Property Name="InvoiceReference" Type="Edm.String" Nullable="false" />
+        <Property Name="DocEntrySeqNumber" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="InvoiceFlag" Type="Edm.String" />
+        <Property Name="TranType" Type="Edm.Int32" Nullable="false" />
+        <Property Name="InvoiceDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="DueDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="OverdueDays" Type="Edm.Int32" Nullable="false" />
+        <Property Name="InvoiceAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="InvoiceBalance" Type="Edm.Double" Nullable="false" />
+        <Property Name="UnallocatedBalance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Valid" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="Minitemno" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Method" Type="Edm.Int16" Nullable="false" />
+      </EntityType>
+      <EntityType Name="CustomerPeriods">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Terms1" Type="Edm.String" />
+        <Property Name="Terms2" Type="Edm.String" />
+        <Property Name="Terms3" Type="Edm.String" />
+        <Property Name="Terms4" Type="Edm.String" />
+        <Property Name="CurrentPeriod" Type="Edm.String" />
+        <Property Name="Period1" Type="Edm.String" />
+        <Property Name="Period2" Type="Edm.String" />
+        <Property Name="Period3" Type="Edm.String" />
+        <Property Name="Unallocated" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="CustomerTransaction">
+        <Key>
+          <PropertyRef Name="TransactionType" />
+          <PropertyRef Name="DocumentEntrySequenceNumber" />
+        </Key>
+        <Property Name="CustomerCode" Type="Edm.String" />
+        <Property Name="BranchCode" Type="Edm.String" />
+        <Property Name="BranchName" Type="Edm.String" />
+        <Property Name="DocumentNumber" Type="Edm.String" />
+        <Property Name="InternalDocumentNumber" Type="Edm.Int64" Nullable="false" />
+        <Property Name="Sequence" Type="Edm.Int64" Nullable="false" />
+        <Property Name="CreditNoteSequence" Type="Edm.Int64" Nullable="false" />
+        <Property Name="DocumentType" Type="Edm.String" />
+        <Property Name="DocumentReference" Type="Edm.String" />
+        <Property Name="DocumentDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="DocumentDueDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="SalesRepCode" Type="Edm.String" />
+        <Property Name="SalesRepName" Type="Edm.String" />
+        <Property Name="InvoiceNumber" Type="Edm.String" />
+        <Property Name="TransactionType" Type="Edm.Int32" Nullable="false" />
+        <Property Name="DocumentEntrySequenceNumber" Type="Edm.Int64" Nullable="false" />
+        <Property Name="DocumentTotal" Type="Edm.Double" Nullable="false" />
+        <Property Name="DocumentTotalExTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="TaxAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="DiscountAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="SalesAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="CostAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="GrossProfitMargin" Type="Edm.Double" Nullable="false" />
+        <Property Name="AgeingPeriod" Type="Edm.Int32" Nullable="false" />
+        <Property Name="AgeingBalance" Type="Edm.Double" Nullable="false" />
+        <Property Name="MiscellaneousAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="EopFlag" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="BasFlag" Type="Edm.Boolean" Nullable="false" />
+        <NavigationProperty Name="CustomerTransactionDetail" Type="Collection(AttService.ViewModel.CustomerTransactionDetail)" />
+      </EntityType>
+      <EntityType Name="CustomerTransactionDetail">
+        <Key>
+          <PropertyRef Name="CustomerCode" />
+          <PropertyRef Name="DocumentNumber" />
+        </Key>
+        <Property Name="CustomerCode" Type="Edm.String" Nullable="false" />
+        <Property Name="CustomerName" Type="Edm.String" />
+        <Property Name="DocumentType" Type="Edm.String" />
+        <Property Name="DocumentNumber" Type="Edm.String" Nullable="false" />
+        <Property Name="InternalDocumentNumber" Type="Edm.Int64" Nullable="false" />
+        <Property Name="Sequence" Type="Edm.Int64" Nullable="false" />
+        <Property Name="CreditNoteSequence" Type="Edm.Int64" Nullable="false" />
+        <Property Name="DocumentDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="LineNumber" Type="Edm.Int32" Nullable="false" />
+        <Property Name="LineType" Type="Edm.Int16" Nullable="false" />
+        <Property Name="LocationCode" Type="Edm.String" />
+        <Property Name="LocationDescription" Type="Edm.String" />
+        <Property Name="ProductCode" Type="Edm.String" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="ProductGroup" Type="Edm.String" />
+        <Property Name="ProductGroupDescription" Type="Edm.String" />
+        <Property Name="QtyInvoice" Type="Edm.Double" Nullable="false" />
+        <Property Name="Rate" Type="Edm.Double" Nullable="false" />
+        <Property Name="LineTotalExTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="LineTaxAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="LineTotalIncTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="Unit" Type="Edm.String" />
+        <Property Name="LineTotalCost" Type="Edm.Double" Nullable="false" />
+        <Property Name="LineDiscountPercentage" Type="Edm.Double" Nullable="false" />
+        <Property Name="LineDiscountAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="IncludeInSalesReporting" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="CostCentre" Type="Edm.String" />
+        <Property Name="CostCentreDescription" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="Deduction">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Employee">
+        <Key>
+          <PropertyRef Name="Location" />
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Location" Type="Edm.String" Nullable="false" />
+        <Property Name="LocationDescription" Type="Edm.String" />
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Inactive" Type="Edm.String" />
+        <Property Name="Title" Type="Edm.String" />
+        <Property Name="FullName" Type="Edm.String" />
+        <Property Name="FirstName" Type="Edm.String" />
+        <Property Name="SecondName" Type="Edm.String" />
+        <Property Name="LastName" Type="Edm.String" />
+        <Property Name="Address1" Type="Edm.String" />
+        <Property Name="Address2" Type="Edm.String" />
+        <Property Name="Suburb" Type="Edm.String" />
+        <Property Name="State" Type="Edm.String" />
+        <Property Name="Postcode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="Phone" Type="Edm.String" />
+        <Property Name="Mobile" Type="Edm.String" />
+        <Property Name="Email" Type="Edm.String" />
+        <Property Name="EmailPers" Type="Edm.String" />
+        <Property Name="WorkEmail" Type="Edm.String" />
+        <Property Name="Gender" Type="Edm.String" />
+        <Property Name="DateOfBirth" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="StartDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="TerminationDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="TaxNumber" Type="Edm.String" />
+        <Property Name="EmployeeGroup" Type="Edm.String" />
+        <Property Name="PayPoint" Type="Edm.String" />
+        <Property Name="PayPointDescription" Type="Edm.String" />
+        <Property Name="CostCentre" Type="Edm.String" />
+        <Property Name="NextOfKinName" Type="Edm.String" />
+        <Property Name="NextOfKinPhone" Type="Edm.String" />
+        <Property Name="NextOfKinRelation" Type="Edm.String" />
+        <Property Name="JobTitle" Type="Edm.String" />
+        <Property Name="InstrumentAward" Type="Edm.String" />
+        <Property Name="Classification" Type="Edm.String" />
+        <Property Name="AutoPay" Type="Edm.String" />
+        <Property Name="PayRateType" Type="Edm.String" />
+        <Property Name="EmploymentStatus" Type="Edm.String" />
+        <Property Name="PayFrequency" Type="Edm.String" />
+        <Property Name="NormalRate" Type="Edm.Double" Nullable="false" />
+        <Property Name="BaseHourPerFrequency" Type="Edm.Double" Nullable="false" />
+        <Property Name="AwardRate" Type="Edm.Double" Nullable="false" />
+        <Property Name="AnnualSalary" Type="Edm.Double" Nullable="false" />
+        <Property Name="HourPerDay" Type="Edm.Double" Nullable="false" />
+        <Property Name="DayPerWeek" Type="Edm.Double" Nullable="false" />
+        <Property Name="UserDefined1" Type="Edm.String" />
+        <Property Name="UserDefined2" Type="Edm.String" />
+        <Property Name="UserDefined3" Type="Edm.String" />
+        <Property Name="CustomDesc1" Type="Edm.String" />
+        <Property Name="CustomDesc2" Type="Edm.String" />
+        <Property Name="CustomDesc3" Type="Edm.String" />
+        <Property Name="CustomDecimal1" Type="Edm.Double" Nullable="false" />
+        <Property Name="CustomDecimal2" Type="Edm.Double" Nullable="false" />
+        <Property Name="CustomDecimal3" Type="Edm.Double" Nullable="false" />
+        <Property Name="CustomDate1" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="CustomDate2" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="CustomDate3" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="CustomYesNo1" Type="Edm.String" />
+        <Property Name="CustomYesNo2" Type="Edm.String" />
+        <Property Name="CustomYesNo3" Type="Edm.String" />
+        <Property Name="CustomNum1" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CustomNum2" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CustomNum3" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="PayHistory" Type="Collection(AttService.ViewModel.PayHistory)" />
+        <NavigationProperty Name="TimeSheet" Type="Collection(AttService.ViewModel.TimeSheet)" />
+        <NavigationProperty Name="EmployeeLeaveDetails" Type="Collection(AttService.ViewModel.EmployeeLeaveDetails)" />
+        <NavigationProperty Name="LeaveTransaction" Type="Collection(AttService.ViewModel.LeaveTransaction)" />
+      </EntityType>
+      <EntityType Name="EmployeeLeaveDetails">
+        <Key>
+          <PropertyRef Name="Location" />
+          <PropertyRef Name="EmployeeCode" />
+        </Key>
+        <Property Name="Location" Type="Edm.String" Nullable="false" />
+        <Property Name="EmployeeCode" Type="Edm.String" Nullable="false" />
+        <Property Name="LeaveAccruedUpTo" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="LeaveStartDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="RDOWeek" Type="Edm.Int32" Nullable="false" />
+        <Property Name="LeaveLoadingPercentage" Type="Edm.Double" Nullable="false" />
+        <Property Name="LeaveLoadingRateType" Type="Edm.String" />
+        <Property Name="StopLeaveAccrualStartDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="StopLeaveAccrualEndDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="FlexiTimeOwing" Type="Edm.Double" Nullable="false" />
+        <NavigationProperty Name="EmployeeLeaveTables" Type="Collection(AttService.ViewModel.EmployeeLeaveTables)" />
+        <NavigationProperty Name="LeaveTransaction" Type="Collection(AttService.ViewModel.LeaveTransaction)" />
+      </EntityType>
+      <EntityType Name="EmployeeLeaveTables">
+        <Key>
+          <PropertyRef Name="Location" />
+          <PropertyRef Name="EmployeeCode" />
+        </Key>
+        <Property Name="Location" Type="Edm.String" Nullable="false" />
+        <Property Name="EmployeeCode" Type="Edm.String" Nullable="false" />
+        <Property Name="LeaveType" Type="Edm.String" />
+        <Property Name="LeaveTable" Type="Edm.String" />
+        <Property Name="LastEntitlementDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="Entitlement" Type="Edm.Double" Nullable="false" />
+        <Property Name="ProRata" Type="Edm.Double" Nullable="false" />
+        <Property Name="Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Contingent" Type="Edm.Double" Nullable="false" />
+        <Property Name="AccrualCalculation" Type="Edm.String" />
+        <Property Name="StopAccrual" Type="Edm.Boolean" Nullable="false" />
+      </EntityType>
+      <EntityType Name="GeneralLedger">
+        <Key>
+          <PropertyRef Name="AccountCode" />
+        </Key>
+        <Property Name="AccountCode" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="AccountType" Type="Edm.Int32" Nullable="false" />
+        <Property Name="DebitCredit" Type="Edm.String" />
+        <Property Name="StandardCode" Type="Edm.String" />
+        <Property Name="AddToAccount1" Type="Edm.String" />
+        <Property Name="AddToAccount2" Type="Edm.String" />
+        <Property Name="EOYIndicator" Type="Edm.String" />
+        <Property Name="EOYAccount" Type="Edm.String" />
+        <Property Name="AccountGroup" Type="Edm.String" />
+        <Property Name="ColumnNum" Type="Edm.String" />
+        <Property Name="Indent" Type="Edm.String" />
+        <Property Name="Underline" Type="Edm.String" />
+        <Property Name="SpaceAfter" Type="Edm.String" />
+        <Property Name="SpaceBefore" Type="Edm.String" />
+        <Property Name="TrialBalanceTotal" Type="Edm.String" />
+        <Property Name="PairToAccount" Type="Edm.String" />
+        <Property Name="PercentageAccount1" Type="Edm.String" />
+        <Property Name="PercentageAccount2" Type="Edm.String" />
+        <Property Name="NoteNumber" Type="Edm.Int16" Nullable="false" />
+        <Property Name="LastYearBalance" Type="Edm.Double" Nullable="false" />
+        <Property Name="OpeningBalance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period1Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period2Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period3Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period4Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period5Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period6Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period7Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period8Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period9Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period10Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period11Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period12Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period13Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget1Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget2Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget3Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget4Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget5Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget6Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget7Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget8Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget9Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget10Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget11Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget12Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Budget13Balance" Type="Edm.Double" Nullable="false" />
+        <NavigationProperty Name="GeneralLedgerTransactionsDetail" Type="Collection(AttService.ViewModel.GeneralLedgerTransactionsDetail)" />
+      </EntityType>
+      <EntityType Name="GeneralLedgerBatchHeader">
+        <Key>
+          <PropertyRef Name="BatchNum" />
+        </Key>
+        <Property Name="BatchNum" Type="Edm.Int64" Nullable="false" />
+        <Property Name="PeriodNum" Type="Edm.Int32" Nullable="false" />
+        <Property Name="PeriodName" Type="Edm.String" />
+        <Property Name="TransactionType" Type="Edm.SByte" Nullable="false" />
+        <Property Name="Source" Type="Edm.Int16" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <NavigationProperty Name="GeneralLedgerTransaction" Type="Collection(AttService.ViewModel.GeneralLedgerTransaction)" />
+      </EntityType>
+      <EntityType Name="GeneralLedgerPeriods">
+        <Key>
+          <PropertyRef Name="TotalPeriods" />
+        </Key>
+        <Property Name="TotalPeriods" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CurrentPeriod" Type="Edm.Int32" Nullable="false" />
+        <Property Name="FinancialYearStart" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="Period1" Type="Edm.String" />
+        <Property Name="Period2" Type="Edm.String" />
+        <Property Name="Period3" Type="Edm.String" />
+        <Property Name="Period4" Type="Edm.String" />
+        <Property Name="Period5" Type="Edm.String" />
+        <Property Name="Period6" Type="Edm.String" />
+        <Property Name="Period7" Type="Edm.String" />
+        <Property Name="Period8" Type="Edm.String" />
+        <Property Name="Period9" Type="Edm.String" />
+        <Property Name="Period10" Type="Edm.String" />
+        <Property Name="Period11" Type="Edm.String" />
+        <Property Name="Period12" Type="Edm.String" />
+        <Property Name="Period13" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="GeneralLedgerTransaction">
+        <Key>
+          <PropertyRef Name="TransactionNum" />
+        </Key>
+        <Property Name="BatchNum" Type="Edm.Int64" Nullable="false" />
+        <Property Name="PeriodNum" Type="Edm.Int32" Nullable="false" />
+        <Property Name="PeriodName" Type="Edm.String" />
+        <Property Name="TransactionNum" Type="Edm.Int64" Nullable="false" />
+        <Property Name="TransactionType" Type="Edm.SByte" Nullable="false" />
+        <Property Name="Source" Type="Edm.Int16" Nullable="false" />
+        <Property Name="TransactionDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="Reference" Type="Edm.String" />
+        <Property Name="Details" Type="Edm.String" />
+        <NavigationProperty Name="GeneralLedgerTransactionsDetail" Type="Collection(AttService.ViewModel.GeneralLedgerTransactionsDetail)" />
+      </EntityType>
+      <EntityType Name="GeneralLedgerTransactionsDetail">
+        <Key>
+          <PropertyRef Name="TranNum" />
+        </Key>
+        <Property Name="BatchNum" Type="Edm.Int64" Nullable="false" />
+        <Property Name="TranNum" Type="Edm.Int64" Nullable="false" />
+        <Property Name="PeriodNum" Type="Edm.Int32" Nullable="false" />
+        <Property Name="PeriodName" Type="Edm.String" />
+        <Property Name="TransactionDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="AccountCode" Type="Edm.String" />
+        <Property Name="AccountDescription" Type="Edm.String" />
+        <Property Name="Reference" Type="Edm.String" />
+        <Property Name="Detail" Type="Edm.String" />
+        <Property Name="CostCentre" Type="Edm.String" />
+        <Property Name="CostCentreName" Type="Edm.String" />
+        <Property Name="Source" Type="Edm.Int32" Nullable="false" />
+        <Property Name="DocType" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Debit" Type="Edm.Double" Nullable="false" />
+        <Property Name="Credit" Type="Edm.Double" Nullable="false" />
+        <Property Name="Amount" Type="Edm.Double" Nullable="false" />
+        <Property Name="BankStatementPage" Type="Edm.Int32" Nullable="false" />
+        <Property Name="BankStatementLine" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ModuleCode" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="Income">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+      </EntityType>
+      <EntityType Name="LeaveTransaction">
+        <Key>
+          <PropertyRef Name="Location" />
+          <PropertyRef Name="EmployeeCode" />
+        </Key>
+        <Property Name="Location" Type="Edm.String" Nullable="false" />
+        <Property Name="EmployeeCode" Type="Edm.String" Nullable="false" />
+        <Property Name="PayPoint" Type="Edm.String" />
+        <Property Name="FullName" Type="Edm.String" />
+        <Property Name="InternalDocumentNumber" Type="Edm.Int64" Nullable="false" />
+        <Property Name="AccrualType" Type="Edm.String" />
+        <Property Name="AccrualCode" Type="Edm.String" />
+        <Property Name="TimeDisplay" Type="Edm.String" />
+        <Property Name="Comment" Type="Edm.String" />
+        <Property Name="TransactionType" Type="Edm.String" />
+        <Property Name="LeaveDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="HoursWorked" Type="Edm.Double" Nullable="false" />
+        <Property Name="FromDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="ToDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="HoursPerDay" Type="Edm.Double" Nullable="false" />
+        <Property Name="EntitlementAccruedHours" Type="Edm.Double" Nullable="false" />
+        <Property Name="EntitlementAccruedDays" Type="Edm.Double" Nullable="false" />
+        <Property Name="ProRataAccruedHours" Type="Edm.Double" Nullable="false" />
+        <Property Name="ProRataAccruedDays" Type="Edm.Double" Nullable="false" />
+        <Property Name="ContingentAccruedHours" Type="Edm.Double" Nullable="false" />
+        <Property Name="ContingentAccruedDays" Type="Edm.Double" Nullable="false" />
+        <Property Name="TotalAccruedHours" Type="Edm.Double" Nullable="false" />
+        <Property Name="TotalAccruedDays" Type="Edm.Double" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Location">
+        <Key>
+          <PropertyRef Name="LocationCode" />
+        </Key>
+        <Property Name="LocationCode" Type="Edm.String" Nullable="false" />
+        <Property Name="LocationDescription" Type="Edm.String" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+      </EntityType>
+      <EntityType Name="PayHistory">
+        <Key>
+          <PropertyRef Name="PayNo" />
+        </Key>
+        <Property Name="PayNo" Type="Edm.Int64" Nullable="false" />
+        <Property Name="Location" Type="Edm.String" />
+        <Property Name="LocationDescription" Type="Edm.String" />
+        <Property Name="EmployeeCode" Type="Edm.String" />
+        <Property Name="EmployeeFullName" Type="Edm.String" />
+        <Property Name="EmployeeSurname" Type="Edm.String" />
+        <Property Name="PayPoint" Type="Edm.String" />
+        <Property Name="PayPointDescription" Type="Edm.String" />
+        <Property Name="PayDescription" Type="Edm.String" />
+        <Property Name="PeriodEndDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="PayDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="HoursWorked" Type="Edm.Double" Nullable="false" />
+        <Property Name="PayFrequency" Type="Edm.String" />
+        <Property Name="Gross" Type="Edm.Double" Nullable="false" />
+        <Property Name="Net" Type="Edm.Double" Nullable="false" />
+        <Property Name="Tax" Type="Edm.Double" Nullable="false" />
+        <Property Name="TotalIncome" Type="Edm.Double" Nullable="false" />
+        <Property Name="TotalAllowances" Type="Edm.Double" Nullable="false" />
+        <Property Name="AllowancesBeforeTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="AllowancesAfterTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="TotalDeductions" Type="Edm.Double" Nullable="false" />
+        <Property Name="DeductionsBeforeTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="DeductionsAfterTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="TotalEmployerContributions" Type="Edm.Double" Nullable="false" />
+        <Property Name="PayType" Type="Edm.Int16" Nullable="false" />
+        <NavigationProperty Name="PayHistoryLine" Type="Collection(AttService.ViewModel.PayHistoryLine)" />
+      </EntityType>
+      <EntityType Name="PayHistoryLine">
+        <Key>
+          <PropertyRef Name="PayNo" />
+          <PropertyRef Name="LineNo" />
+        </Key>
+        <Property Name="PayNo" Type="Edm.Int64" Nullable="false" />
+        <Property Name="LineNo" Type="Edm.Int32" Nullable="false" />
+        <Property Name="PayElementCode" Type="Edm.String" />
+        <Property Name="CodeType" Type="Edm.String" />
+        <Property Name="LineType" Type="Edm.String" />
+        <Property Name="Location" Type="Edm.String" />
+        <Property Name="EmployeeCode" Type="Edm.String" />
+        <Property Name="HoursValue" Type="Edm.Double" Nullable="false" />
+        <Property Name="Rate" Type="Edm.Double" Nullable="false" />
+        <Property Name="CostCentre" Type="Edm.String" />
+        <Property Name="CostCentreDescription" Type="Edm.String" />
+        <Property Name="EmployeeGroup" Type="Edm.String" />
+        <Property Name="OtherAccount" Type="Edm.String" />
+        <Property Name="Total" Type="Edm.Double" Nullable="false" />
+        <Property Name="LineDescription" Type="Edm.String" />
+        <Property Name="LeaveFromDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="LeaveToDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="PayType" Type="Edm.Int16" Nullable="false" />
+      </EntityType>
+      <EntityType Name="PostCode">
+        <Key>
+          <PropertyRef Name="Locality" />
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Locality" Type="Edm.String" Nullable="false" />
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+      </EntityType>
+      <EntityType Name="ProductOption">
+        <Key>
+          <PropertyRef Name="MultiLocation" />
+        </Key>
+        <Property Name="MultiLocation" Type="Edm.Boolean" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Product">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="LocationCode" Type="Edm.String" />
+        <Property Name="LocationName" Type="Edm.String" />
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="GroupCode" Type="Edm.String" />
+        <Property Name="GroupName" Type="Edm.String" />
+        <Property Name="Supplier1" Type="Edm.String" />
+        <Property Name="Supplier2" Type="Edm.String" />
+        <Property Name="Supplier3" Type="Edm.String" />
+        <Property Name="Type" Type="Edm.String" />
+        <Property Name="QtyInStock" Type="Edm.Double" Nullable="false" />
+        <Property Name="QtyOrder" Type="Edm.Double" Nullable="false" />
+        <Property Name="QtyBackOrder" Type="Edm.Double" Nullable="false" />
+        <Property Name="QtyReserved" Type="Edm.Double" Nullable="false" />
+        <Property Name="QtyConsigned" Type="Edm.Double" Nullable="false" />
+        <Property Name="QtyRequisitioned" Type="Edm.Double" Nullable="false" />
+        <Property Name="QtyPurchaseOrder" Type="Edm.Double" Nullable="false" />
+        <Property Name="BOMQtyReserved" Type="Edm.Double" Nullable="false" />
+        <Property Name="BOMQtyProductionBatch" Type="Edm.Double" Nullable="false" />
+        <Property Name="UnitCost" Type="Edm.Double" Nullable="false" />
+        <Property Name="StockUnit" Type="Edm.String" />
+        <Property Name="PurchaseUnit" Type="Edm.String" />
+        <Property Name="Superseded" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="ReorderLevel" Type="Edm.Double" Nullable="false" />
+        <Property Name="ReorderQty" Type="Edm.Double" Nullable="false" />
+        <Property Name="Barcode" Type="Edm.String" />
+        <Property Name="BomProductType" Type="Edm.String" />
+        <Property Name="ManufactureQuantity" Type="Edm.Double" Nullable="false" />
+        <Property Name="BomInstructions" Type="Edm.String" />
+        <NavigationProperty Name="ProductQuantityChanges" Type="Collection(AttService.ViewModel.ProductQuantityChanges)" />
+        <NavigationProperty Name="CustomerTransactionDetail" Type="Collection(AttService.ViewModel.CustomerTransactionDetail)" />
+      </EntityType>
+      <EntityType Name="ProductQuantityChanges">
+        <Key>
+          <PropertyRef Name="ProductCode" />
+        </Key>
+        <Property Name="LocationCode" Type="Edm.String" />
+        <Property Name="ProductCode" Type="Edm.String" Nullable="false" />
+        <Property Name="TransactionDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="EnteredDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="UpdatedField" Type="Edm.String" />
+        <Property Name="Qty" Type="Edm.Double" Nullable="false" />
+        <Property Name="Sequence" Type="Edm.Int64" Nullable="false" />
+      </EntityType>
+      <EntityType Name="SalesRep">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="Commission" Type="Edm.Double" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Supplier">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="Contact" Type="Edm.String" />
+        <Property Name="Phone" Type="Edm.String" />
+        <Property Name="Email" Type="Edm.String" />
+        <Property Name="SortDetail" Type="Edm.String" />
+        <Property Name="Category" Type="Edm.String" />
+        <Property Name="Inactive" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="Period0Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period1Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period2Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Period3Balance" Type="Edm.Double" Nullable="false" />
+        <Property Name="UnallocatedBalance" Type="Edm.Double" Nullable="false" />
+        <Property Name="Address1" Type="Edm.String" />
+        <Property Name="Address2" Type="Edm.String" />
+        <Property Name="Suburb" Type="Edm.String" />
+        <Property Name="State" Type="Edm.String" />
+        <Property Name="Postcode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="Fax" Type="Edm.String" />
+        <Property Name="Comment" Type="Edm.String" />
+        <Property Name="BusinessNumber" Type="Edm.String" />
+        <Property Name="GLN" Type="Edm.String" />
+        <Property Name="Website" Type="Edm.String" />
+        <NavigationProperty Name="SupplierTransaction" Type="Collection(AttService.ViewModel.SupplierTransaction)" />
+        <NavigationProperty Name="SupplierTransactionDetail" Type="Collection(AttService.ViewModel.SupplierTransactionDetail)" />
+      </EntityType>
+      <EntityType Name="SupplierDateAgeing">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="AgeingBasedDate" Type="Edm.String" />
+        <Property Name="AgeingBands" Type="Edm.String" />
+        <Property Name="CurrentDays" Type="Edm.Int32" Nullable="false" />
+        <Property Name="AgeingBand1Days" Type="Edm.Int32" Nullable="false" />
+        <Property Name="AgeingBand2Days" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CurrentDescription" Type="Edm.String" />
+        <Property Name="AgeingBand1Description" Type="Edm.String" />
+        <Property Name="AgeingBand2Description" Type="Edm.String" />
+        <Property Name="AgeingBand3Description" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="SupplierPeriods">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="CurrentPeriod" Type="Edm.String" />
+        <Property Name="Period1" Type="Edm.String" />
+        <Property Name="Period2" Type="Edm.String" />
+        <Property Name="Period3" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="SupplierTransaction">
+        <Key>
+          <PropertyRef Name="SupplierCode" />
+          <PropertyRef Name="DocumentNumber" />
+          <PropertyRef Name="DocumentType" />
+          <PropertyRef Name="Sequence" />
+          <PropertyRef Name="InvoiceNumber" />
+        </Key>
+        <Property Name="SupplierCode" Type="Edm.String" Nullable="false" />
+        <Property Name="DocumentNumber" Type="Edm.String" Nullable="false" />
+        <Property Name="DocumentType" Type="Edm.String" Nullable="false" />
+        <Property Name="Sequence" Type="Edm.Int64" Nullable="false" />
+        <Property Name="InvoiceNumber" Type="Edm.String" Nullable="false" />
+        <Property Name="TransactionType" Type="Edm.Int32" Nullable="false" />
+        <Property Name="DocumentEntrySequenceNumber" Type="Edm.Int64" Nullable="false" />
+        <Property Name="DocumentReference" Type="Edm.String" />
+        <Property Name="DocumentDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="DocumentDueDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="DocumentTotal" Type="Edm.Double" Nullable="false" />
+        <Property Name="TaxAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="DocumentTotalExTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="AgeingBalance" Type="Edm.Double" Nullable="false" />
+        <Property Name="AgeingPeriod" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="SupplierTransactionDetail" Type="Collection(AttService.ViewModel.SupplierTransactionDetail)" />
+      </EntityType>
+      <EntityType Name="TimeSheet">
+        <Key>
+          <PropertyRef Name="PayNo" />
+        </Key>
+        <Property Name="PayNo" Type="Edm.Int64" Nullable="false" />
+        <Property Name="Location" Type="Edm.String" />
+        <Property Name="LocationDescription" Type="Edm.String" />
+        <Property Name="EmployeeCode" Type="Edm.String" />
+        <Property Name="EmployeeFullName" Type="Edm.String" />
+        <Property Name="EmployeeSurname" Type="Edm.String" />
+        <Property Name="PayPoint" Type="Edm.String" />
+        <Property Name="PayPointDescription" Type="Edm.String" />
+        <Property Name="PayDescription" Type="Edm.String" />
+        <Property Name="PeriodEndDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="PayDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="PayStatus" Type="Edm.String" />
+        <Property Name="HoursWorked" Type="Edm.Double" Nullable="false" />
+        <Property Name="PayFrequency" Type="Edm.String" />
+        <Property Name="Gross" Type="Edm.Double" Nullable="false" />
+        <Property Name="Net" Type="Edm.Double" Nullable="false" />
+        <Property Name="Tax" Type="Edm.Double" Nullable="false" />
+        <Property Name="TotalIncome" Type="Edm.Double" Nullable="false" />
+        <Property Name="TotalAllowances" Type="Edm.Double" Nullable="false" />
+        <Property Name="AllowancesBeforeTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="AllowancesAfterTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="TotalDeductions" Type="Edm.Double" Nullable="false" />
+        <Property Name="DeductionsBeforeTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="DeductionsAfterTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="TotalEmployerContributions" Type="Edm.Double" Nullable="false" />
+        <Property Name="PayType" Type="Edm.Int16" Nullable="false" />
+        <NavigationProperty Name="TimeSheetLine" Type="Collection(AttService.ViewModel.TimeSheetLine)" />
+      </EntityType>
+      <EntityType Name="TimeSheetLine">
+        <Key>
+          <PropertyRef Name="PayNo" />
+          <PropertyRef Name="LineNo" />
+        </Key>
+        <Property Name="PayNo" Type="Edm.Int64" Nullable="false" />
+        <Property Name="LineNo" Type="Edm.Int32" Nullable="false" />
+        <Property Name="PayElementCode" Type="Edm.String" />
+        <Property Name="CodeType" Type="Edm.String" />
+        <Property Name="LineType" Type="Edm.String" />
+        <Property Name="Location" Type="Edm.String" />
+        <Property Name="EmployeeCode" Type="Edm.String" />
+        <Property Name="HoursValue" Type="Edm.Double" Nullable="false" />
+        <Property Name="Rate" Type="Edm.Double" Nullable="false" />
+        <Property Name="CostCentre" Type="Edm.String" />
+        <Property Name="CostCentreDescription" Type="Edm.String" />
+        <Property Name="EmployeeGroup" Type="Edm.String" />
+        <Property Name="OtherAccount" Type="Edm.String" />
+        <Property Name="Total" Type="Edm.Double" Nullable="false" />
+        <Property Name="LineDescription" Type="Edm.String" />
+        <Property Name="LeaveFromDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="LeaveToDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="PayType" Type="Edm.Int16" Nullable="false" />
+      </EntityType>
+      <EntityType Name="SupplierTransactionDetail">
+        <Key>
+          <PropertyRef Name="SupplierCode" />
+          <PropertyRef Name="DocumentType" />
+          <PropertyRef Name="DocumentNumber" />
+          <PropertyRef Name="Sequence" />
+        </Key>
+        <Property Name="SupplierCode" Type="Edm.String" Nullable="false" />
+        <Property Name="SupplierName" Type="Edm.String" />
+        <Property Name="DocumentType" Type="Edm.String" Nullable="false" />
+        <Property Name="DocumentNumber" Type="Edm.String" Nullable="false" />
+        <Property Name="Sequence" Type="Edm.Int64" Nullable="false" />
+        <Property Name="DocumentDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="InternalDocumentNumber" Type="Edm.Int64" Nullable="false" />
+        <Property Name="LineNumber" Type="Edm.Int32" Nullable="false" />
+        <Property Name="LineType" Type="Edm.Int32" Nullable="false" />
+        <Property Name="LocationCode" Type="Edm.String" />
+        <Property Name="LocationDescription" Type="Edm.String" />
+        <Property Name="ProductCode" Type="Edm.String" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="ProductGroup" Type="Edm.String" />
+        <Property Name="ProductGroupDescription" Type="Edm.String" />
+        <Property Name="QtyInvoice" Type="Edm.Double" Nullable="false" />
+        <Property Name="Rate" Type="Edm.Double" Nullable="false" />
+        <Property Name="LineTotalExTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="LineTaxAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="LineTotalIncTax" Type="Edm.Double" Nullable="false" />
+        <Property Name="Unit" Type="Edm.String" />
+        <Property Name="LineDiscountPercentage" Type="Edm.Double" Nullable="false" />
+        <Property Name="LineDiscountAmount" Type="Edm.Double" Nullable="false" />
+        <Property Name="CostCentre" Type="Edm.String" />
+        <Property Name="CostCentreDescription" Type="Edm.String" />
+      </EntityType>
+      <Action Name="GetFilterInBodyBomBatch" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.BomBatch)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.BomBatch)" />
+      </Action>
+      <Action Name="GetFilterInBodyBomHeader" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.BomHeader)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.BomHeader)" />
+      </Action>
+      <Action Name="GetFilterInBodyBomDetail" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.BomDetail)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.BomDetail)" />
+      </Action>
+      <Action Name="GetFilterInBodyCustomer" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.Customer)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.Customer)" />
+      </Action>
+      <Action Name="GetFilterInBodyCustomerTransaction" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.CustomerTransaction)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.CustomerTransaction)" />
+      </Action>
+      <Action Name="GetFilterInBodyCustomerTransactionDetail" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.CustomerTransactionDetail)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.CustomerTransactionDetail)" />
+      </Action>
+      <Action Name="GetFilterInBodyGeneralLedger" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.GeneralLedger)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.GeneralLedger)" />
+      </Action>
+      <Action Name="GetFilterInBodyGeneralLedgerBatchHeader" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.GeneralLedgerBatchHeader)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.GeneralLedgerBatchHeader)" />
+      </Action>
+      <Action Name="GetFilterInBodyGeneralLedgerTransaction" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.GeneralLedgerTransaction)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.GeneralLedgerTransaction)" />
+      </Action>
+      <Action Name="GetFilterInBodyGeneralLedgerTransactionsDetail" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.GeneralLedgerTransactionsDetail)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.GeneralLedgerTransactionsDetail)" />
+      </Action>
+      <Action Name="GetFilterInBodyGeneralLedgerPeriods" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.GeneralLedgerPeriods)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.GeneralLedgerPeriods)" />
+      </Action>
+      <Action Name="GetFilterInBodyCompanyOption" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.CompanyOption)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.CompanyOption)" />
+      </Action>
+      <Action Name="GetFilterInBodyCostCentre" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.CostCentre)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.CostCentre)" />
+      </Action>
+      <Action Name="GetFilterInBodyCostCentreFinancials" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.CostCentreFinancials)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.CostCentreFinancials)" />
+      </Action>
+      <Action Name="GetFilterInBodyCostCentreBudgetFinancials" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.CostCentreBudgetFinancials)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.CostCentreBudgetFinancials)" />
+      </Action>
+      <Action Name="GetFilterInBodyCustomerDateAgeing" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.CustomerDateAgeing)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.CustomerDateAgeing)" />
+      </Action>
+      <Action Name="GetFilterInBodyPayHistory" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.PayHistory)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.PayHistory)" />
+      </Action>
+      <Action Name="GetFilterInBodyPayHistoryLine" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.PayHistoryLine)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.PayHistoryLine)" />
+      </Action>
+      <Action Name="GetFilterInBodyEmployee" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.Employee)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.Employee)" />
+      </Action>
+      <Action Name="GetFilterInBodyLeaveTransaction" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.LeaveTransaction)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.LeaveTransaction)" />
+      </Action>
+      <Action Name="GetFilterInBodyCustomerPeriods" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.CustomerPeriods)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.CustomerPeriods)" />
+      </Action>
+      <Action Name="GetFilterInBodySalesRep" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.SalesRep)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.SalesRep)" />
+      </Action>
+      <Action Name="GetFilterInBodySupplier" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.Supplier)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.Supplier)" />
+      </Action>
+      <Action Name="GetFilterInBodySupplierDateAgeing" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.SupplierDateAgeing)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.SupplierDateAgeing)" />
+      </Action>
+      <Action Name="GetFilterInBodySupplierPeriods" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.SupplierPeriods)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.SupplierPeriods)" />
+      </Action>
+      <Action Name="GetFilterInBodySupplierTransaction" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.SupplierTransaction)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.SupplierTransaction)" />
+      </Action>
+      <Action Name="GetFilterInBodySupplierTransaction" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.SupplierTransactionDetail)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.SupplierTransactionDetail)" />
+      </Action>
+      <Action Name="GetFilterInBodyTimeSheet" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.TimeSheet)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.TimeSheet)" />
+      </Action>
+      <Action Name="GetFilterInBodyTimeSheetLine" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.TimeSheetLine)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.TimeSheetLine)" />
+      </Action>
+      <Action Name="GetFilterInBodyProductOption" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.ProductOption)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.ProductOption)" />
+      </Action>
+      <Action Name="GetFilterInBodyProduct" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.Product)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.Product)" />
+      </Action>
+      <Action Name="GetFilterInBodyProductQuantityChanges" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.ProductQuantityChanges)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.ProductQuantityChanges)" />
+      </Action>
+      <Action Name="GetFilterInBodyLocation" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.Location)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.Location)" />
+      </Action>
+      <Action Name="GetFilterInBodyEmployeeLeaveDetails" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.EmployeeLeaveDetails)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.EmployeeLeaveDetails)" />
+      </Action>
+      <Action Name="GetFilterInBodyEmployeeLeaveTables" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(AttService.ViewModel.EmployeeLeaveTables)" />
+        <Parameter Name="OdataFilterExtension" Type="Edm.String" Unicode="false" />
+        <ReturnType Type="Collection(AttService.ViewModel.EmployeeLeaveTables)" />
+      </Action>
+      <EntityContainer Name="DefaultContainer">
+        <EntitySet Name="Allowance" EntityType="AttService.ViewModel.Allowance" />
+        <EntitySet Name="BomBatch" EntityType="AttService.ViewModel.BomBatch">
+          <NavigationPropertyBinding Path="BomHeader" Target="BomHeader" />
+        </EntitySet>
+        <EntitySet Name="BomHeader" EntityType="AttService.ViewModel.BomHeader">
+          <NavigationPropertyBinding Path="BomDetail" Target="BomDetail" />
+        </EntitySet>
+        <EntitySet Name="BomDetail" EntityType="AttService.ViewModel.BomDetail">
+          <NavigationPropertyBinding Path="SubBomDetail" Target="BomDetail" />
+        </EntitySet>
+        <EntitySet Name="CompanyOption" EntityType="AttService.ViewModel.CompanyOption" />
+        <EntitySet Name="Contribution" EntityType="AttService.ViewModel.Contribution" />
+        <EntitySet Name="CostCentre" EntityType="AttService.ViewModel.CostCentre" />
+        <EntitySet Name="CostCentreBudgetFinancials" EntityType="AttService.ViewModel.CostCentreBudgetFinancials" />
+        <EntitySet Name="CostCentreFinancials" EntityType="AttService.ViewModel.CostCentreFinancials" />
+        <EntitySet Name="Customer" EntityType="AttService.ViewModel.Customer">
+          <NavigationPropertyBinding Path="CustomerTransaction" Target="CustomerTransaction" />
+          <NavigationPropertyBinding Path="CustomerTransactionDetail" Target="CustomerTransactionDetail" />
+        </EntitySet>
+        <EntitySet Name="CustomerDateAgeing" EntityType="AttService.ViewModel.CustomerDateAgeing" />
+        <EntitySet Name="CustomerInvoice" EntityType="AttService.ViewModel.CustomerInvoiceDDAM" />
+        <EntitySet Name="CustomerPeriods" EntityType="AttService.ViewModel.CustomerPeriods" />
+        <EntitySet Name="CustomerTransaction" EntityType="AttService.ViewModel.CustomerTransaction">
+          <NavigationPropertyBinding Path="CustomerTransactionDetail" Target="CustomerTransactionDetail" />
+        </EntitySet>
+        <EntitySet Name="CustomerTransactionDetail" EntityType="AttService.ViewModel.CustomerTransactionDetail" />
+        <EntitySet Name="Deduction" EntityType="AttService.ViewModel.Deduction" />
+        <EntitySet Name="Employee" EntityType="AttService.ViewModel.Employee">
+          <NavigationPropertyBinding Path="PayHistory" Target="PayHistory" />
+          <NavigationPropertyBinding Path="TimeSheet" Target="TimeSheet" />
+          <NavigationPropertyBinding Path="EmployeeLeaveDetails" Target="EmployeeLeaveDetails" />
+          <NavigationPropertyBinding Path="LeaveTransaction" Target="LeaveTransaction" />
+        </EntitySet>
+        <EntitySet Name="EmployeeLeaveDetails" EntityType="AttService.ViewModel.EmployeeLeaveDetails">
+          <NavigationPropertyBinding Path="EmployeeLeaveTables" Target="EmployeeLeaveTables" />
+          <NavigationPropertyBinding Path="LeaveTransaction" Target="LeaveTransaction" />
+        </EntitySet>
+        <EntitySet Name="EmployeeLeaveTables" EntityType="AttService.ViewModel.EmployeeLeaveTables" />
+        <EntitySet Name="GeneralLedger" EntityType="AttService.ViewModel.GeneralLedger">
+          <NavigationPropertyBinding Path="GeneralLedgerTransactionsDetail" Target="GeneralLedgerTransactionsDetail" />
+        </EntitySet>
+        <EntitySet Name="GeneralLedgerBatchHeader" EntityType="AttService.ViewModel.GeneralLedgerBatchHeader">
+          <NavigationPropertyBinding Path="GeneralLedgerTransaction" Target="GeneralLedgerTransaction" />
+        </EntitySet>
+        <EntitySet Name="GeneralLedgerPeriods" EntityType="AttService.ViewModel.GeneralLedgerPeriods" />
+        <EntitySet Name="GeneralLedgerTransaction" EntityType="AttService.ViewModel.GeneralLedgerTransaction">
+          <NavigationPropertyBinding Path="GeneralLedgerTransactionsDetail" Target="GeneralLedgerTransactionsDetail" />
+        </EntitySet>
+        <EntitySet Name="GeneralLedgerTransactionsDetail" EntityType="AttService.ViewModel.GeneralLedgerTransactionsDetail" />
+        <EntitySet Name="Income" EntityType="AttService.ViewModel.Income" />
+        <EntitySet Name="LeaveTransaction" EntityType="AttService.ViewModel.LeaveTransaction" />
+        <EntitySet Name="Location" EntityType="AttService.ViewModel.Location" />
+        <EntitySet Name="PayHistory" EntityType="AttService.ViewModel.PayHistory">
+          <NavigationPropertyBinding Path="PayHistoryLine" Target="PayHistoryLine" />
+        </EntitySet>
+        <EntitySet Name="PayHistoryLine" EntityType="AttService.ViewModel.PayHistoryLine" />
+        <EntitySet Name="PostCode" EntityType="AttService.ViewModel.PostCode" />
+        <EntitySet Name="ProductOption" EntityType="AttService.ViewModel.ProductOption" />
+        <EntitySet Name="Product" EntityType="AttService.ViewModel.Product">
+          <NavigationPropertyBinding Path="ProductQuantityChanges" Target="ProductQuantityChanges" />
+          <NavigationPropertyBinding Path="CustomerTransactionDetail" Target="CustomerTransactionDetail" />
+        </EntitySet>
+        <EntitySet Name="ProductQuantityChanges" EntityType="AttService.ViewModel.ProductQuantityChanges" />
+        <EntitySet Name="SalesRep" EntityType="AttService.ViewModel.SalesRep" />
+        <EntitySet Name="Supplier" EntityType="AttService.ViewModel.Supplier">
+          <NavigationPropertyBinding Path="SupplierTransaction" Target="SupplierTransaction" />
+          <NavigationPropertyBinding Path="SupplierTransactionDetail" Target="SupplierTransactionDetail" />
+        </EntitySet>
+        <EntitySet Name="SupplierDateAgeing" EntityType="AttService.ViewModel.SupplierDateAgeing" />
+        <EntitySet Name="SupplierPeriods" EntityType="AttService.ViewModel.SupplierPeriods" />
+        <EntitySet Name="SupplierTransaction" EntityType="AttService.ViewModel.SupplierTransaction">
+          <NavigationPropertyBinding Path="SupplierTransactionDetail" Target="SupplierTransactionDetail" />
+        </EntitySet>
+        <EntitySet Name="TimeSheet" EntityType="AttService.ViewModel.TimeSheet">
+          <NavigationPropertyBinding Path="TimeSheetLine" Target="TimeSheetLine" />
+        </EntitySet>
+        <EntitySet Name="TimeSheetLine" EntityType="AttService.ViewModel.TimeSheetLine" />
+        <EntitySet Name="SupplierTransactionDetail" EntityType="AttService.ViewModel.SupplierTransactionDetail" />
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

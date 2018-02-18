@@ -1,0 +1,10 @@
+<div class='veracity'>
+	<div fileDrop (onFileDrop)="onFileDrop($event)">
+		<button md-button-raised (click)='saveLayout()'>Save Layout</button>Drag layout file here to use a previously saved layout.
+		<div [ngGrid]="{'col_width': 25, 'row_height': 25, 'cascade': 'no' }" (onItemChange)='onModelsChange($event)'>
+			<div *ngFor='let m of models'>
+				<viewmodel [model]='m'></viewmodel>
+			</div>
+		</div>
+	</div>
+</div>
